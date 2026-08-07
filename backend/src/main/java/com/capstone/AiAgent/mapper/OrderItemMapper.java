@@ -11,15 +11,17 @@ import org.springframework.stereotype.Component;
 public class OrderItemMapper {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public OrderItemMapper(ProductRepository productRepository) {
+    public OrderItemMapper(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     public OrderItemResponseDto toDto(OrderItem item) {
         return new OrderItemResponseDto(
                 item.getId(),
-                ProductMapper.toDto(item.getProduct()),
+                productMapper.toDto(item.getProduct()),
                 item.getQuantity());
     }
 
