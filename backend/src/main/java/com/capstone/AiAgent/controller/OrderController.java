@@ -7,6 +7,7 @@ import com.capstone.AiAgent.mapper.OrderMapper;
 import com.capstone.AiAgent.model.Order;
 import com.capstone.AiAgent.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderResponseDto> order(@RequestBody OrderRequestDto orderRequest) {
         OrderResponseDto order = orderService.placeOrder(orderRequest);
-        return ResponseEntity.ok().body(order);
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 
     @GetMapping
